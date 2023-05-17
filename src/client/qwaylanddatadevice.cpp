@@ -122,6 +122,12 @@ bool QWaylandDataDevice::startDrag(QMimeData *mimeData, QWaylandWindow *icon)
         return false;
     }
 
+    // dragging data without mimetypes is a legal operation in Qt terms
+    // but Wayland uses a mimetype to determine if a drag is accepted or not
+    // In this rare case, insert a placeholder
+    if (mimeData->formats().isEmpty())
+        mimeData->setData("application/x-qt-avoid-empty-placeholder", QByteArray("1"));
+
     m_dragSource.reset(new QWaylandDataSource(m_display->dndSelectionHandler(), mimeData));
     connect(m_dragSource.data(), &QWaylandDataSource::cancelled, this, &QWaylandDataDevice::dragSourceCancelled);
 
