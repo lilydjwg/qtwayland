@@ -344,8 +344,8 @@ void QWaylandTextInputv3::updateState(Qt::InputMethodQueries queries, uint32_t f
         }
     }
 
-    if (needsCommit
-            && (flags == update_state_change || flags == update_state_enter))
+    if ((needsCommit
+            && flags == update_state_change) || flags == update_state_enter)
         commit();
 }
 
