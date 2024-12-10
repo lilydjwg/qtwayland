@@ -574,8 +574,8 @@ bool QWaylandXdgSurface::requestActivate()
                 connect(tokenProvider, &QWaylandXdgActivationTokenV1::done, this,
                         [this, tokenProvider](const QString &token) {
                             m_shell->activation()->activate(token, window()->wlSurface());
-                            tokenProvider->deleteLater();
                         });
+                connect(tokenProvider, &QWaylandXdgActivationTokenV1::done, tokenProvider, &QObject::deleteLater);
                 return true;
             }
         }
