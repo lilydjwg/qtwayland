@@ -155,7 +155,7 @@ void QWaylandTextInputv3::zwp_text_input_v3_done(uint32_t serial)
         // only use single underline style for now
         QTextCharFormat format;
         format.setFontUnderline(true);
-        format.setUnderlineStyle(QTextCharFormat::SingleUnderline);
+        format.setUnderlineStyle(QTextCharFormat::DashUnderline);
         QInputMethodEvent::Attribute attribute2(QInputMethodEvent::TextFormat,
                                                 0,
                                                 m_pendingPreeditString.text.length(), format);
