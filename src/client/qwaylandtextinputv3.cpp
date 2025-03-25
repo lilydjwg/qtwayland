@@ -283,7 +283,7 @@ void QWaylandTextInputv3::updateState(Qt::InputMethodQueries queries, uint32_t f
         const QRect &nativeRect = QHighDpi::toNativePixels(windowRect, QGuiApplication::focusWindow());
         const QMargins margins = window->clientSideMargins();
         const QRect &surfaceRect = nativeRect.translated(margins.left(), margins.top());
-        if (surfaceRect != m_cursorRect) {
+        if (surfaceRect != m_cursorRect || flags == update_state_enter) {
             set_cursor_rectangle(surfaceRect.x(), surfaceRect.y(), surfaceRect.width(), surfaceRect.height());
             m_cursorRect = surfaceRect;
             needsCommit = true;
